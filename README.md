@@ -59,7 +59,7 @@
 1. **Клонирование или создание проекта**
     ```bash
     git clone https://github.com/arutunov/lias1leo_veb.git
-    cd lias1leo_veb
+    cd ./lias1leo_veb
     ```
 
 2. **Создание виртуального окружения и установка зависимостей**
