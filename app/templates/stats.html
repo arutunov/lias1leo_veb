@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+    <h2>Статистика</h2>
+
+    <div class="stats-grid">
+        <div class="stat-card income">
+            <h3>Доходы</h3>
+            <p class="stat-value">{{ stats.total_income }} ₽</p>
+        </div>
+        <div class="stat-card expense">
+            <h3>Расходы</h3>
+            <p class="stat-value">{{ stats.total_expense }} ₽</p>
+        </div>
+        <div class="stat-card balance">
+            <h3>Баланс</h3>
+            <p class="stat-value">{{ stats.balance }} ₽</p>
+        </div>
+        <div class="stat-card count">
+            <h3>Операций</h3>
+            <p class="stat-value">{{ stats.transaction_count }}</p>
+        </div>
+    </div>
+
+    <div class="chart-container">
+        <h3>Соотношение доходов и расходов</h3>
+        <div class="chart">
+            <div
+                class="chart-bar income-bar"
+                style="width: {% if stats.total_income + stats.total_expense > 0 %}{{ (stats.total_income / (stats.total_income + stats.total_expense)) * 100 }}{% else %}50{% endif %}%"
+            >
+                Доходы: {{ stats.total_income }} ₽
+            </div>
+            <div
+                class="chart-bar expense-bar"
+                style="width: {% if stats.total_income + stats.total_expense > 0 %}{{ (stats.total_expense / (stats.total_income + stats.total_expense)) * 100 }}{% else %}50{% endif %}%"
+            >
+                Расходы: {{ stats.total_expense }} ₽
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

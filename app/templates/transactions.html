@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+    <h2>Все финансовые операции</h2>
+
+    <a href="/add-transaction" class="btn">Добавить операцию</a>
+
+    <table id="transactions-table">
+        <thead>
+            <tr>
+                <th>Тип</th>
+                <th>Сумма</th>
+                <th>Описание</th>
+                <th>Дата</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+            <tr id="transaction-{{ transaction.id }}">
+                <td class="{{ transaction.type }}">
+                    {% if transaction.type == 'income' %}Доход{% else %}Расход{%
+                    endif %}
+                </td>
+                <td>{{ transaction.amount }} ₽</td>
+                <td>{{ transaction.description }}</td>
+                <td>{{ transaction.date.strftime('%Y-%m-%d %H:%M') }}</td>
+                <td>
+                    <button
+                        class="btn-danger"
+                        hx-delete="/transaction/{{ transaction.id }}"
+                        hx-target="#transaction-{{ transaction.id }}"
+                        hx-confirm="Удалить эту операцию?"
+                    >
+                        Удалить
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
